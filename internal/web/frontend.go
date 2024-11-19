@@ -1,4 +1,4 @@
-package frontend
+package web
 
 // From: https://blog.stackademic.com/golang-with-vite-react-with-live-reload-9e929099752d
 
