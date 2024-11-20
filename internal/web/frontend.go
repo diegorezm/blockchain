@@ -8,7 +8,6 @@ import (
 	"net/url"
 	"os"
 
-	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -25,7 +24,7 @@ var (
 )
 
 func RegisterHandlers(e *echo.Echo) {
-	if os.Getenv("ENV") == "dev" {
+	if os.Getenv("ENV") == "development" {
 		log.Println("Running in dev mode")
 		setupDevProxy(e)
 		return
