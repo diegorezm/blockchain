@@ -16,7 +16,7 @@ export class TokenService<T extends JWTPayload> {
 
 
   async genToken(payload: T, expiresAt?: Date): Promise<{exp: Date, token: string}> {
-    let exp = expiresAt || this.expiresIn;
+    const exp = expiresAt || this.expiresIn;
 
     const token = await new SignJWT(payload)
       .setProtectedHeader({alg: this.algorithm})
@@ -35,7 +35,7 @@ export class TokenService<T extends JWTPayload> {
         algorithms: [this.algorithm]
       })
       return payload as T;
-    } catch (error: any) {
+    } catch (error) {
       console.error(error)
       return;
     }

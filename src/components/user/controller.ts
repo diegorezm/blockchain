@@ -13,7 +13,7 @@ export async function createUserHandler(user: UserInsert): Promise<ErrorResponse
   const payload = userInsertSchema.safeParse(user);
   if (!payload.success) {
     const fieldErrors = payload.error.format();
-    let response: ErrorResponse = {
+    const response: ErrorResponse = {
       error: {
         message: "Error creating user.",
         fields: fieldErrors
@@ -23,7 +23,7 @@ export async function createUserHandler(user: UserInsert): Promise<ErrorResponse
   }
   const result = await createUser(user);
   if (result !== undefined) {
-    let response: ErrorResponse = {
+    const response: ErrorResponse = {
       error: {
         message: result.error,
         fields: null
@@ -37,7 +37,7 @@ export async function createUserHandler(user: UserInsert): Promise<ErrorResponse
 export async function getAllUsersHandler(): Promise<ErrorResponse | UserSafe[]> {
   const result = await getAllUsers();
   if (result !== undefined && 'error' in result) {
-    let response: ErrorResponse = {
+    const response: ErrorResponse = {
       error: {
         message: result.error,
         fields: null
@@ -58,7 +58,7 @@ export async function getAllUsersHandler(): Promise<ErrorResponse | UserSafe[]> 
 export async function getUserByIdHandler(id: string): Promise<ErrorResponse | UserSafe> {
   const result = await getUserById(id);
   if (result !== undefined && 'error' in result) {
-    let response: ErrorResponse = {
+    const response: ErrorResponse = {
       error: {
         message: result.error,
         fields: null
@@ -78,7 +78,7 @@ export async function getUserByIdHandler(id: string): Promise<ErrorResponse | Us
 export async function getUserByEmailHandler(email: string): Promise<ErrorResponse | UserSafe> {
   const result = await getUserByEmail(email);
   if (result !== undefined && 'error' in result) {
-    let response: ErrorResponse = {
+    const response: ErrorResponse = {
       error: {
         message: result.error,
         fields: null

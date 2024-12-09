@@ -25,7 +25,7 @@ export async function createSession(userId: string) {
       token,
       expiresAt: exp
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     return {
       error: "Not able to create session."
@@ -51,7 +51,7 @@ export async function getSessionByToken(token: string) {
     }
 
     return session;
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     return {
       error: "Invalid token."
@@ -62,7 +62,7 @@ export async function getSessionByToken(token: string) {
 export async function removeSession(token: string) {
   try {
     await db.delete(sessionsTable).where(eq(sessionsTable.token, token));
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     return {
       error: "Not able to remove session."
