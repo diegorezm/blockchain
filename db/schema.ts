@@ -24,3 +24,4 @@ export const sessionsTable = pgTable("sessions", {
     mode: "date"
   }).notNull()
 })
+

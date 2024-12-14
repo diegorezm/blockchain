@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #eff1f5;
+  --foreground: #4c4f69;
+  --muted-foreground: #5c5f77;
+  --muted-background: #e6e9ef;
+  --accent-foreground: #dce0e8;
+  --accent-background: #4c4f69;
+  --background-alt: #dce0e8;
+  --foreground-alt: #4c4f69;
+  --red-foreground: #d20f39;
+  --yellow-foreground: #df8e1d;
+  --green-foreground: #40a02b;
+}
+
+@media (prefers-color-scheme: dark) {}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-optical-sizing: auto;
+  line-height: 1.5;
+  font-weight: 500;
+  font-style: normal;
+  scrollbar-color: var(--foreground) var(--background);
+  line-height: 1.5;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
