@@ -1,8 +1,15 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import {Avatar, AvatarFallback} from "@/components/ui/avatar"
 
-import {HomeIcon, Info, LogIn, Mail, Menu} from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+import {HomeIcon, Info, LayoutDashboard, LogIn, LogOut, Mail, Menu, User} from "lucide-react";
 import {usePathname} from 'next/navigation';
 import {Button} from "@/components/ui/button";
 
@@ -15,6 +22,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import {useState} from "react";
+import {cn} from "@/lib/utils";
+import {UserSafe} from "@/features/user/model";
+import {useServerAction} from "zsa-react";
+import {logoutAction} from "@/features/auth/controller";
+import {useRouter} from "next/navigation";
+import {exec} from "child_process";
+import toast from "react-hot-toast";
 
 const LINKS = [
   {
@@ -36,6 +50,7 @@ const LINKS = [
 
 type Props = {
   pathname: string;
+  user: UserSafe | null
 }
 
 const MobileNavbar = ({pathname}: Props) => {
@@ -72,7 +87,9 @@ const MobileNavbar = ({pathname}: Props) => {
               )
             })}
             <Link href="/auth/login" className="w-full">
-              <Button variant={pathname === "/auth/login" ? "default" : "ghost"} size="lg" className="text-xl w-full">
+              <Button variant={pathname === "/auth/login" ? "default" : "ghost"} size="lg" className="text-xl w-full"
+                onClick={() => setIsOpen(false)}
+              >
                 <LogIn className="h-6 w-6" />
                 Login
               </Button>
@@ -84,7 +101,20 @@ const MobileNavbar = ({pathname}: Props) => {
   )
 }
 
-const DesktopNavbar = ({pathname}: Props) => {
+const DesktopNavbar = ({pathname, user}: Props) => {
+  const router = useRouter()
+  const {execute, isPending} = useServerAction(logoutAction)
+
+  const onClick = async () => {
+    const [data, err] = await execute()
+    if (err) {
+      toast.error(err.message)
+    } else {
+      toast.success(data.message);
+      router.push("/auth/login")
+    }
+  }
+
   return (
     <div className="hidden lg:flex flex-row justify-between gap-2 py-2 w-full items-center">
       <Link href="/">
@@ -95,7 +125,7 @@ const DesktopNavbar = ({pathname}: Props) => {
           const isActive = pathname === link.href;
           return (
             <Link key={link.href} href={link.href}>
-              <Button variant={isActive ? "link" : "ghost"} className="text-xl">
+              <Button variant={"ghost"} className={cn("text-xl", isActive && "text-primary")}>
                 <link.Icon className="h-6 w-6" />
                 {link.label}
               </Button>
@@ -103,22 +133,58 @@ const DesktopNavbar = ({pathname}: Props) => {
           )
         }
         )}
-        <Link href="/auth/login">
-          <Button variant={"default"} size="lg" className="text-xl">
-            Login
-          </Button>
-        </Link>
+        {user ? (
+          <Popover>
+            <PopoverTrigger>
+
+              <Avatar>
+                <AvatarFallback>
+                  {user.name.charAt(0).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+            </PopoverTrigger>
+            <PopoverContent className="w-full p-1">
+              <ul>
+                <li>
+                  <Link href="/dashboard" className="flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500">
+                    <LayoutDashboard className="size-4" />
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard" className="flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500">
+                    <User className="size-4" />
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <button className="flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500" onClick={onClick} disabled={isPending}>
+                    <LogOut className="size-4" />
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </PopoverContent>
+          </Popover>
+        ) : (
+          <Link href="/auth/login">
+            <Button variant={"default"} size="lg" className="text-xl">
+              Login
+            </Button>
+          </Link>
+        )}
+
       </div>
     </div>
   );
 };
 
-export const Navbar = () => {
+export const Navbar = ({user}: {user: UserSafe | null}) => {
   const pathname = usePathname();
   return (
     <>
-      <DesktopNavbar pathname={pathname} />
-      <MobileNavbar pathname={pathname} />
+      <DesktopNavbar pathname={pathname} user={user} />
+      <MobileNavbar pathname={pathname} user={user} />
     </>
   )
 }

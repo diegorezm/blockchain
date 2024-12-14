@@ -2,6 +2,9 @@
 
 import {usePathname} from "next/navigation";
 import {MobileSidebar} from "./mobile-sidebar"
+import {UserSafe} from "@/features/user/model";
+
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
 
 const MESSAGES: Record<string, {title: string, description: string}> = {
   "/dashboard/transactions": {
@@ -18,7 +21,7 @@ const MESSAGES: Record<string, {title: string, description: string}> = {
   },
 }
 
-export const Navbar = () => {
+export const Navbar = ({user}: {user: UserSafe}) => {
   const pathname = usePathname();
   const message = MESSAGES[pathname];
   if (!message) {
@@ -32,7 +35,11 @@ export const Navbar = () => {
       </div>
       <MobileSidebar />
       <div>
-        testing
+        <Avatar>
+          <AvatarFallback>
+            {user.name.charAt(0).toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
       </div>
     </nav>
   )

@@ -18,9 +18,12 @@ import {userLoginSchema} from "@/features/user/model";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useServerAction} from 'zsa-react'
 import {z} from "zod";
-import {loginAction} from "@/features/session/controller";
+import {loginAction} from "@/features/auth/controller";
+import toast from "react-hot-toast";
+import {useRouter} from "next/navigation";
 
 export const LoginForm = () => {
+  const router = useRouter()
   const {execute, isPending} = useServerAction(loginAction)
   const form = useForm<z.infer<typeof userLoginSchema>>({
     resolver: zodResolver(userLoginSchema),
@@ -32,6 +35,14 @@ export const LoginForm = () => {
 
   const onSubmit = async (values: z.infer<typeof userLoginSchema>) => {
     const [data, err] = await execute(values)
+
+    if (err) {
+      toast.error(err.message)
+    } else {
+      toast.success(data.message)
+      form.reset()
+      router.push("/dashboard")
+    }
   }
 
   return (

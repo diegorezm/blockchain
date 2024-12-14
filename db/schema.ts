@@ -9,6 +9,7 @@ const timestamps = {
   }).defaultNow(),
 }
 
+// TODO: add image_url field
 export const usersTable = pgTable("users", {
   id: uuid().defaultRandom().primaryKey(),
   name: varchar("name", {length: 255}).notNull(),

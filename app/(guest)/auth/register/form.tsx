@@ -16,11 +16,13 @@ import {useForm} from "react-hook-form";
 import {UserInsert, userInsertSchema} from "@/features/user/model";
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useServerAction} from "zsa-react";
-import {registerAction} from "@/features/session/controller";
+import {registerAction} from "@/features/auth/controller";
 import toast from "react-hot-toast";
+import {useRouter} from "next/navigation";
 
 export const RegisterForm = () => {
   const {isPending, execute} = useServerAction(registerAction);
+  const router = useRouter()
 
   const form = useForm<UserInsert>({
     resolver: zodResolver(userInsertSchema),
@@ -34,12 +36,14 @@ export const RegisterForm = () => {
 
   const onSubmit = async (values: UserInsert) => {
     const [data, err] = await execute(values);
-
     if (err) {
       toast.error(err)
     } else {
       toast.success(data.message)
+      form.reset();
+      router.push("/auth/login")
     }
+
   }
 
   return (

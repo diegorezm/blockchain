@@ -1,7 +1,17 @@
 import {Sidebar} from "./_components/sidebar";
 import {Navbar} from "./_components/navbar";
+import {getSession} from "@/features/auth/lib";
+import {redirect} from "next/navigation";
+import {UserSafe} from "@/features/user/model";
 
 export default async function DashboardLayout({children}: {children: React.ReactNode}) {
+  let user: UserSafe;
+  const session = await getSession()
+  if ('error' in session) {
+    return redirect("/auth/login")
+  } else {
+    user = session.user
+  }
   return (
     <div className="min-h-screen">
       <div className="flex w-full h-full">
@@ -10,7 +20,7 @@ export default async function DashboardLayout({children}: {children: React.React
         </div>
         <div className="w-full lg:pl-[264px]">
           <div className="mx-auto max-w-screen-2xl h-full">
-            <Navbar />
+            <Navbar user={user} />
             <main className="h-full py-8 px-6 flex flex-col">
               {children}
             </main>

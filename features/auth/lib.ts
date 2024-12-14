@@ -1,21 +1,22 @@
+import "server-only"
+
 import {createSession, getSessionByToken, removeSession} from "./queries";
 import {cookies} from "next/headers";
 import {SESSION_COOKIE_KEY} from "./constants";
-import {UserSafe} from "../user/model";
 import {getUserById} from "../user/queries";
 import {createServerActionProcedure} from "zsa";
 
 export const protectedServerAction = createServerActionProcedure().handler(async () => {
-  const session = await verifySession();
+  const session = await getSession();
   if ('error' in session) {
     throw new Error("User is not authenticated.")
   }
   return {
-    userId: session.id
+    userId: session.user.id
   }
 })
 
-export async function verifySession(): Promise<UserSafe | {error: string}> {
+export async function getSession() {
   const store = await cookies();
   const token = store.get(SESSION_COOKIE_KEY);
   if (token) {
@@ -33,11 +34,14 @@ export async function verifySession(): Promise<UserSafe | {error: string}> {
       }
     }
     return {
-      id: userId,
-      name: user.name,
-      email: user.email,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
+      user: {
+        id: userId,
+        name: user.name,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
+      sessionId: token
     }
   } else {
     return {
