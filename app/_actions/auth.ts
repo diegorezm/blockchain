@@ -63,4 +63,6 @@ export const signOutAction = async () => {
   const response = await getSession()
   if (!response.session) return
   signOutUseCase(response.session.id)
+  const cookieStore = await cookies();
+  cookieStore.delete(SESSION_KEY)
 }
