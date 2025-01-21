@@ -25,14 +25,17 @@ function shapeErrors({err}: any) {
 export const authenticatedAction = createServerActionProcedure()
   .experimental_shapeError(shapeErrors)
   .handler(async () => {
-    const {userId} = await getSession()
+    const {user, session} = await getSession();
+    if (!user || !session) {
+      throw new Error("unauthorized");
+    }
     await rateLimitByKey({
-      key: `${userId}-global`,
+      key: `${user.id}-global`,
       limit: 10,
       window: 10000,
     });
-    return {userId};
-  })
+    return {user, session};
+  });
 
 export const unauthenticatedAction = createServerActionProcedure()
   .experimental_shapeError(shapeErrors)
@@ -42,4 +45,4 @@ export const unauthenticatedAction = createServerActionProcedure()
       limit: 10,
       window: 10000,
     });
-  })
+  });
