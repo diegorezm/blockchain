@@ -1,11 +1,18 @@
 import {db} from "@/db";
-import {NewUser} from "../models/user";
+import {NewUser, UserSafe} from "../models/user";
 import {usersTable} from "@/db/schema";
 import {eq} from "drizzle-orm";
 
 export const UserRepository = {
   async create(user: NewUser) {
     await db.insert(usersTable).values(user)
+  },
+
+  async update(id: string, user: Partial<Omit<UserSafe, "id">>) {
+    await db.update(usersTable).set({
+      ...user,
+      updatedAt: new Date(Date.now())
+    }).where(eq(usersTable.id, id))
   },
 
   async findById(id: string) {
