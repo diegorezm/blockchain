@@ -14,6 +14,7 @@ export const usersTable = pgTable("users", {
   name: varchar("name", {length: 255}).notNull(),
   email: varchar("email", {length: 255}).notNull(),
   imgUrl: text('img_url'),
+  imgKey: text('img_key'),
   password: varchar("password", {length: 255}).notNull(),
   ...timestamps
 })
