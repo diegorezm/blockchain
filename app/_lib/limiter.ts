@@ -1,7 +1,9 @@
 import {getIp} from "@/app/_lib/get-ip";
-import {PublicError} from "@/src/types/errors";
+import {Redis} from 'ioredis'
 
-export class RateLimitError extends PublicError {
+const redis = new Redis()
+
+export class RateLimitError extends Error {
   constructor() {
     super("Rate limit exceeded");
     this.name = "RateLimitError";
@@ -61,20 +63,14 @@ export async function rateLimitByKey({
   limit?: number;
   window?: number;
 }) {
-  const tracker = trackers[key] || {count: 0, expiresAt: 0};
-
-  if (!trackers[key]) {
-    trackers[key] = tracker;
-  }
-
-  if (tracker.expiresAt < Date.now()) {
-    tracker.count = 0;
-    tracker.expiresAt = Date.now() + window;
-  }
-
-  tracker.count++;
-
-  if (tracker.count > limit) {
+  const redisKey = `rate_limit:${key}`
+  const pipeline = redis.pipeline()
+  pipeline.incr(redisKey)
+  pipeline.expire(redisKey, Date.now() + window)
+  const results = await pipeline.exec()
+  if (!results) return
+  const count = results[0][1] as number;
+  if (count > limit) {
     throw new RateLimitError();
   }
 }
