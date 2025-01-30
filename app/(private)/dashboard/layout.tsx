@@ -1,9 +1,9 @@
 "use server";
 
-import { redirect } from "next/navigation";
-import { getSession } from "../_actions/auth";
-import { Navbar } from "./_components/navbar";
-import { Sidebar } from "./_components/sidebar";
+import {redirect} from "next/navigation";
+import {getSession} from "@/app/_actions/auth";
+import {Navbar} from "./_components/navbar";
+import {Sidebar} from "./_components/sidebar";
 
 export default async function DashboardLayout({
   children,
@@ -20,9 +20,9 @@ export default async function DashboardLayout({
           <Sidebar />
         </div>
         <div className="w-full lg:pl-[264px]">
-          <div className="mx-auto max-w-screen-2xl h-full">
+          <div className="h-full mx-auto max-w-screen-2xl">
             <Navbar user={user} />
-            <main className="h-full py-8 px-6 flex flex-col">{children}</main>
+            <main className="flex flex-col h-full px-6 py-8">{children}</main>
           </div>
         </div>
       </div>

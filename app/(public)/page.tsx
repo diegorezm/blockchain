@@ -1,11 +1,11 @@
 "use server";
 
 import Link from "next/link";
-import { ArrowDown, ArrowRight, Bitcoin } from "lucide-react";
-import { Shield, Clock, Coins } from "lucide-react";
-import { Button } from "./_components/ui/button";
+import {ArrowDown, ArrowRight, Bitcoin} from "lucide-react";
+import {Shield, Clock, Coins} from "lucide-react";
+import {Button} from "@/app/_components/ui/button";
 
-import { isValidSession } from "./_actions/auth";
+import {isValidSession} from "@/app/_actions/auth";
 
 export default async function Home() {
   const isAuth = await isValidSession();
@@ -32,7 +32,7 @@ export default async function Home() {
       {/* Hero Section */}
       <section
         className="relative flex flex-col items-center justify-center w-full min-h-screen text-center bg-gradient-to-b from-primary/10 via-transparent to-background styled-container"
-        style={{ clipPath: "inset(0 0 0 0)" }}
+        style={{clipPath: "inset(0 0 0 0)"}}
       >
         <Bitcoin className="w-20 h-20 text-primary" />
         <h1 className="text-4xl font-bold leading-tight md:text-6xl text-primary animate-fade-in-up">
