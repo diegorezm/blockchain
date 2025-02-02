@@ -2,10 +2,11 @@ import {NextResponse} from "next/server";
 
 import type {NextRequest} from "next/server";
 
-export async function middleware(request: NextRequest): Promise<NextResponse> {
+export function middleware(request: NextRequest): NextResponse {
   if (request.method === "GET") {
     return NextResponse.next();
   }
+
   const originHeader = request.headers.get("Origin");
   // NOTE: You may need to use `X-Forwarded-Host` instead
   const hostHeader = request.headers.get("Host");

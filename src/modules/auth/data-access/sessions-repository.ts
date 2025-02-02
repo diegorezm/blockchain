@@ -1,7 +1,7 @@
 import {db} from "@/db";
 import {sessionsTable} from "@/db/schema";
 import {eq} from "drizzle-orm";
-import {Session} from "@/src/modules/auth/models/session";
+import {type Session} from "@/src/modules/auth/models/session";
 
 export const SessionsRepository = {
   async create(session: Session): Promise<void> {

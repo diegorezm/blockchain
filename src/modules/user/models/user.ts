@@ -1,4 +1,4 @@
-import {usersTable} from "@/db/schema";
+import {type usersTable} from "@/db/schema";
 
 export type User = typeof usersTable.$inferSelect
 export type NewUser = typeof usersTable.$inferInsert

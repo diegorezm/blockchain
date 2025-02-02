@@ -1,4 +1,4 @@
-import { UserSafe } from "@/src/modules/user/models/user";
+import { type UserSafe } from "@/src/modules/user/models/user";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function UserAvatar({

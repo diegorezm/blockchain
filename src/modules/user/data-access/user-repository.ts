@@ -1,5 +1,5 @@
 import {db} from "@/db";
-import {NewUser, UserSafe} from "../models/user";
+import {type NewUser, type UserSafe} from "../models/user";
 import {usersTable} from "@/db/schema";
 import {eq} from "drizzle-orm";
 

@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { MobileSidebar } from "./mobile-sidebar";
 import { UserButton } from "@/app/_components/user-button";
-import { UserSafe } from "@/src/modules/user/models/user";
+import { type UserSafe } from "@/src/modules/user/models/user";
 
 const MESSAGES: Record<string, { title: string; description: string }> = {
   "/dashboard/profile": {

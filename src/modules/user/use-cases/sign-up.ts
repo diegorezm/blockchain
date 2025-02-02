@@ -1,6 +1,6 @@
 import {UserRepository} from "../data-access/user-repository";
 import {UserAlreadyExists} from "../errors/signup-errors";
-import {NewUser} from "../models/user";
+import {type NewUser} from "../models/user";
 import {hash} from '@/src/utils/hashing'
 
 export const signUpUseCase = async ({name, email, password}: NewUser) => {

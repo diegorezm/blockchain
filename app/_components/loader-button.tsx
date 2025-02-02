@@ -1,5 +1,5 @@
 import {Loader2Icon} from "lucide-react";
-import {Button, ButtonProps} from "@/app/_components/ui/button";
+import {Button, type ButtonProps} from "@/app/_components/ui/button";
 import {cn} from "@/app/_lib/utils";
 
 export function LoaderButton({

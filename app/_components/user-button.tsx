@@ -7,7 +7,7 @@ import {
 } from "@/app/_components/ui/popover";
 import {LayoutDashboard, LogOut, User} from "lucide-react";
 import {UserAvatar} from "./user-avatar";
-import {UserSafe} from "@/src/modules/user/models/user";
+import {type UserSafe} from "@/src/modules/user/models/user";
 import {useToast} from "../_hooks/use-toast";
 import {useRouter} from "next/navigation";
 import {signOutAction} from "../_actions/auth";

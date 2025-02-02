@@ -23,13 +23,13 @@ import {useForm} from "react-hook-form";
 import {useServerAction} from "zsa-react";
 import {DottedSeparator} from "@/app/_components/dotted-separator";
 import {ImageIcon, Pencil} from "lucide-react";
-import {ChangeEvent, useRef, useState} from "react";
+import {type ChangeEvent, useRef, useState} from "react";
 import {useRouter} from "next/navigation"
 import {Button} from "@/app/_components/ui/button";
 import {LoaderButton} from "@/app/_components/loader-button"
 import {removeUserProfilePicAction, updateUserAction, updateUserProfilePicAction} from "./actions";
 import {Input} from "@/app/_components/ui/input";
-import {UserSafe} from "@/src/modules/user/models/user";
+import {type UserSafe} from "@/src/modules/user/models/user";
 import {useToast} from "@/app/_hooks/use-toast";
 import env from "@/env";
 

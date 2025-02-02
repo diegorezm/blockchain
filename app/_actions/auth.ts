@@ -1,11 +1,10 @@
 "use server";
 
 import env from "@/env";
-import {signOutUseCase} from "@/src/modules/auth/use-cases/sign-out";
-import {validateSessionTokenUseCase} from "@/src/modules/auth/use-cases/validate-session";
-import {findUserByIdUseCase} from "@/src/modules/user/use-cases/find-by-id";
-import {cookies} from "next/headers";
-import {authenticatedAction} from "../_lib/safe-action";
+import { signOutUseCase } from "@/src/modules/auth/use-cases/sign-out";
+import { validateSessionTokenUseCase } from "@/src/modules/auth/use-cases/validate-session";
+import { findUserByIdUseCase } from "@/src/modules/user/use-cases/find-by-id";
+import { cookies } from "next/headers";
 
 const SESSION_KEY = "session";
 
@@ -32,21 +31,21 @@ export async function getSession() {
   const token = cookieStore.get(SESSION_KEY)?.value;
   if (token) {
     try {
-      const {session, userId} = await validateSessionTokenUseCase(token);
+      const { session, userId } = await validateSessionTokenUseCase(token);
       const user = await findUserByIdUseCase(userId);
       if (!user) {
         await signOutUseCase(session.id);
-        return {session: null, user: null};
+        return { session: null, user: null };
       }
-      return {session, user};
+      return { session, user };
     } catch (e: unknown) {
       if (env.NODE_ENV === "development") {
         console.error(e);
       }
-      return {session: null, user: null};
+      return { session: null, user: null };
     }
   }
-  return {session: null, user: null};
+  return { session: null, user: null };
 }
 
 export async function setSession(token: string, expiresAt: Date) {
@@ -60,9 +59,9 @@ export async function setSession(token: string, expiresAt: Date) {
 }
 
 export const signOutAction = async () => {
-  const response = await getSession()
-  if (!response.session) return
-  signOutUseCase(response.session.id)
+  const response = await getSession();
+  if (!response.session) return;
+  signOutUseCase(response.session.id);
   const cookieStore = await cookies();
-  cookieStore.delete(SESSION_KEY)
-}
+  cookieStore.delete(SESSION_KEY);
+};

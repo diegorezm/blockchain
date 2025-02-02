@@ -4,7 +4,7 @@ import {SignInError} from "../errors/sign-errors"
 import {encodeHexLowerCase} from "@oslojs/encoding"
 import {sha256} from "@oslojs/crypto/sha2"
 import {generateSessionToken} from ".."
-import {Session} from "../models/session"
+import {type Session} from "../models/session"
 import {SessionsRepository} from "../data-access/sessions-repository"
 
 type SignInUseCaseProps = {
