@@ -1,0 +1,23 @@
+.card_title {
+  font-size: var(--fs-xxl);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.card_title h1 {
+  font-size: var(--fs-xxl);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.card_title p {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.08px;
+}

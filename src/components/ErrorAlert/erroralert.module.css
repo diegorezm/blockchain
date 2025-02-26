@@ -1,0 +1,17 @@
+.error_card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--fs-md);
+  margin-top: 12px;
+  background-color: var(--error-color);
+  padding: var(--padding-md);
+  border: 2px solid var(--foreground);
+}
+
+.x_icon {
+}
+
+.x_icon:hover {
+  cursor: pointer;
+}

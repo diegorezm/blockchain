@@ -1,0 +1,24 @@
+.navbar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar_links {
+  display: flex;
+  gap: 12px;
+}
+
+.navbar_logo {
+  font-size: var(--fs-lg);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1px;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.navbar_logo span {
+  color: var(--primary-color);
+}

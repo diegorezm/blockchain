@@ -1,0 +1,15 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: var(--padding-sm);
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 1050px) {
+  .page {
+    padding: var(--padding-md);
+  }
+}

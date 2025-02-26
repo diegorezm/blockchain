@@ -1,0 +1,142 @@
+.hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: var(--padding-lg);
+  background-color: var(--muted-color);
+  color: var(--muted-foreground);
+  border: 4px solid var(--foreground);
+}
+
+.hero img {
+  display: none;
+  width: 22rem;
+  height: 22rem;
+}
+
+@media screen and (min-width: 1050px) {
+  .hero {
+    text-align: start;
+    justify-content: space-around;
+    width: 80%;
+    margin: auto;
+  }
+
+  .hero img {
+    display: block;
+  }
+}
+
+.hero_txt {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+@media screen and (min-width: 1050px) {
+  .hero_txt {
+    align-items: start;
+  }
+}
+
+.hero_txt h1 {
+  color: var(--primary-color);
+  font-size: var(--fs-xxl);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1px;
+}
+
+.hero_txt p {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.learn_more {
+  margin-top: 48px;
+  padding: var(--padding-lg);
+  background-color: var(--background);
+}
+
+.learn_more_title {
+  font-size: var(--fs-xxl);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1px;
+  color: var(--foreground);
+  text-align: center;
+  margin-bottom: var(--padding-lg);
+}
+
+.learn_more_features {
+  display: grid;
+  gap: var(--padding-lg);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Feature Card */
+.feature_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--padding-md);
+  border: 2px solid var(--foreground);
+  transition: all 0.3s ease;
+}
+
+.feature_card-primary {
+  background-color: var(--primary-color);
+}
+
+.feature_card-muted {
+  background-color: var(--muted-color);
+}
+
+.feature_card-secondary {
+  background-color: var(--secondary-color);
+}
+
+.feature_card:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0px 0px var(--foreground);
+}
+
+.feature_icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--padding-md);
+  stroke-width: 2;
+  color: var(--foreground);
+}
+
+.feature_title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: var(--padding-sm);
+}
+
+.feature_description {
+  font-size: var(--fs-md);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.feature_description-primary {
+  color: var(--foreground);
+}
+
+.feature_description-secondary {
+  color: var(--background);
+}
+
+.feature_description-muted {
+  color: var(--muted-foreground);
+}

@@ -1,0 +1,20 @@
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-sm);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  gap: 6px;
+  font-size: var(--fs-md);
+  padding: var(--padding-sm);
+  font-weight: 500;
+}
+
+.link:hover {
+  opacity: 0.9;
+}

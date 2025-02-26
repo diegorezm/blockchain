@@ -1,42 +1,127 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+:root {
+  /* Base for the whole app */
+  --foreground: black;
+  --background: #fdf8e2;
+
+  /* Interesting colors */
+  --primary-color: #a3b565;
+  --secondary-color: #f1642e;
+
+  /* Muted colors */
+  --muted-color: #504e76;
+  --muted-foreground: #c4c3e3;
+
+  /* Additional colors */
+  --success-color: #27ae60;
+  --warning-color: #f1c40f;
+  --error-color: #e74c3c;
+
+  --padding-xs: 4px;
+  --padding-sm: 8px;
+  --padding-md: 16px;
+  --padding-lg: 24px;
+  --padding-xl: 32px;
+
+  --margin-xs: 4px;
+  --margin-sm: 8px;
+  --margin-md: 16px;
+  --margin-lg: 24px;
+  --margin-xl: 32px;
+
+  --fs-xs: 12px;
+  --fs-sm: 16px;
+  --fs-md: 20px;
+  --fs-lg: 24px;
+  --fs-xl: 32px;
+  --fs-xxl: 40px;
+
+  --breakpoint: 1500px;
+}
+
+a {
+  color: var(--foreground);
+  text-decoration: none;
 }
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
+  font-family: Geist, Arial, Helvetica, sans-serif;
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+  font-size: var(--fs-sm);
+  font-optical-sizing: auto;
+  line-height: 1.5;
+  font-weight: 500;
+  font-style: normal;
+  scrollbar-color: var(--foreground) var(--background);
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
 }

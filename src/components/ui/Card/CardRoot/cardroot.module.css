@@ -1,0 +1,16 @@
+.card {
+  border: 4px solid var(--foreground);
+  padding: var(--padding-md);
+}
+
+.card-primary {
+  background-color: var(--primary-color);
+}
+
+.card-secondary {
+  background-color: var(--secondary-color);
+}
+
+.card-outline {
+  background-color: var(--background);
+}

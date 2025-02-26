@@ -1,0 +1,13 @@
+.input {
+  font-size: var(--fs-md);
+  padding: var(--padding-sm);
+  border: 2px solid var(--foreground);
+  background-color: transparent;
+  color: var(--foreground);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input::placeholder {
+  opacity: 1;
+}
