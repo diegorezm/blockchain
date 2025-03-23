@@ -9,8 +9,11 @@ export default function PublicLayout({
 }) {
   return (
     <div className="flex flex-col">
-      <SignedIn>
-        <nav className="w-full px-6 py-4 md:px-24 flex justify-end">
+      <nav className="w-full px-6 py-4 md:px-24 flex justify-between">
+        <Link href="/">
+          <Button variant="ghost">Cryptobank</Button>
+        </Link>
+        <SignedIn>
           <UserButton
             appearance={{
               variables: {
@@ -25,19 +28,14 @@ export default function PublicLayout({
               },
             }}
           />
-        </nav>
-      </SignedIn>
-      <SignedOut>
-        <nav className="w-full px-6 py-4 md:px-24 flex justify-between">
-          <Link href="/">
-            <Button variant="ghost">Cryptobank</Button>
-          </Link>
+        </SignedIn>
 
+        <SignedOut>
           <Link href="/sign-in">
             <Button variant="secondary">SignIn</Button>
           </Link>
-        </nav>
-      </SignedOut>
+        </SignedOut>
+      </nav>
       {children}
     </div>
   );
