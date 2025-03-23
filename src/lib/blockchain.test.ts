@@ -19,7 +19,6 @@ describe("Blockchain", () => {
   it("Should append the new block to the chain", () => {
     expect(blockchain.getChain().length).toBe(1);
     blockchain.appendBlock("testing");
-    console.log(blockchain.getChain());
     expect(blockchain.getChain().length).toBe(2);
     expect(blockchain.getLastBlock().data).toBe("testing");
   });
