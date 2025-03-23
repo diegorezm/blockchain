@@ -30,7 +30,7 @@ export function Button({
 
         size === "sm" && "text-sm p-2",
         size === "md" && "text-md px-6 py-2",
-        size === "lg" && "text-lg px-12 py-4",
+        size === "lg" && "text-lg px-12 py-2",
 
         className,
       )}
