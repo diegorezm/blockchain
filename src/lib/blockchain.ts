@@ -11,21 +11,16 @@ export type Block = {
 };
 
 export class Blockchain {
-  private chain: Block[];
   private difficulty: number = 2;
+  private chain: Block[];
 
-  constructor(chain?: Block[]) {
-    if (chain) {
-      this.chain = chain;
-    } else {
-      const genesis = this._generateGenesis();
-      this.chain = [genesis];
-    }
+  constructor() {
+    const genesis = this._generateGenesis();
+    this.chain = [genesis];
   }
 
   public appendBlock(data: string) {
     const prev = this.getLastBlock();
-    const timestamp = Date.now();
 
     const newBlock: Block = {
       index: this.chain.length,
@@ -33,7 +28,7 @@ export class Blockchain {
       hash: "",
       prevHash: prev.hash,
       nonce: 0,
-      timestamp,
+      timestamp: Date.now(),
     };
 
     const { nonce, hash } = this._mine(newBlock);
@@ -102,6 +97,7 @@ export class Blockchain {
   private _mine(block: Omit<Block, "hash">): { nonce: number; hash: string } {
     let nonce = 0;
     let hash: string;
+
     while (true) {
       const temp = { ...block, nonce };
       hash = this._hashBlock(temp);
@@ -111,6 +107,7 @@ export class Blockchain {
         nonce++;
       }
     }
+
     return { nonce, hash };
   }
 
