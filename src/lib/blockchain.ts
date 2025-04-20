@@ -36,11 +36,9 @@ export class Blockchain {
     newBlock.nonce = nonce;
     newBlock.hash = hash;
 
-    LOGGING.info(`The new block nonce is ${newBlock.nonce}`);
-
     this.chain.push(newBlock);
 
-    if (!this._isChainValid()) {
+    if (!this._isChainValid(prev, newBlock)) {
       this.chain.pop();
     }
   }
@@ -53,43 +51,34 @@ export class Blockchain {
     return this.chain[this.chain.length - 1];
   }
 
-  private _isChainValid() {
-    let prevBlock = this.chain[0];
-    let blockIdx = 1;
+  private _isChainValid(prevBlock: Block, nextBlock: Block) {
+    const blockHash = this._hashBlock({
+      data: nextBlock.data,
+      index: nextBlock.index,
+      prevHash: nextBlock.prevHash,
+      nonce: nextBlock.nonce,
+      timestamp: nextBlock.timestamp,
+    });
 
-    while (blockIdx < this.chain.length) {
-      const block = this.chain[blockIdx];
+    if (nextBlock.hash !== blockHash) {
+      LOGGING.error(
+        `The current hash: ${nextBlock.hash} is different from the generated hash: ${blockHash}`,
+      );
+      return false;
+    }
 
-      const blockHash = this._hashBlock({
-        data: block.data,
-        index: block.index,
-        prevHash: block.prevHash,
-        nonce: block.nonce,
-        timestamp: block.timestamp,
-      });
+    if (nextBlock.prevHash !== prevBlock.hash) {
+      LOGGING.error(
+        `The previous hash ${nextBlock.prevHash} does not match ${prevBlock.hash}`,
+      );
+      return false;
+    }
 
-      if (block.hash !== blockHash) {
-        LOGGING.error(
-          `The current hash: ${block.hash} is different from the generated hash: ${blockHash}`,
-        );
-        return false;
-      }
-
-      if (block.prevHash !== prevBlock.hash) {
-        LOGGING.error(
-          `The previous hash ${block.prevHash} does not match ${prevBlock.hash}`,
-        );
-        return false;
-      }
-
-      if (block.index !== prevBlock.index + 1) {
-        LOGGING.error(
-          `Previous index ${prevBlock.index} does not match new index ${block.index}`,
-        );
-        return false;
-      }
-      prevBlock = block;
-      blockIdx++;
+    if (nextBlock.index !== prevBlock.index + 1) {
+      LOGGING.error(
+        `Previous index ${prevBlock.index} does not match new index ${nextBlock.index}`,
+      );
+      return false;
     }
     return true;
   }
