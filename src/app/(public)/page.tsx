@@ -35,7 +35,7 @@ export default async function HomePage() {
           <h1 className="text-5xl md:text-6xl lg:text-7xl leading-tight font-bold text-center lg:text-left">
             Welcome to <span className="text-primary">crypto</span>bank
           </h1>
-          <p className="text-lg text-surface">
+          <p className="text-lg">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
             ipsa quos et corporis nisi cupiditate quo aperiam? Possimus quod ex
             ullam, quasi, cumque ad, repellat provident illo totam veritatis

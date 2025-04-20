@@ -1,31 +1,37 @@
 @import "tailwindcss";
 
 /* :root { */
-/*   --background: #fff6ee; */
-/*   --foreground: #262628; */
+/*   --background: #000000; */
+/*   --foreground: #faf9f5; */
 /**/
-/*   --primary: #262628; */
-/*   --on-primary: #fff6ee; */
+/*   --primary: #f865b0; */
+/*   --on-primary: #000000; */
 /**/
-/*   --secondary: #d6dc81; */
-/*   --on-secondary: #262628; */
+/*   --secondary: #d1f94d; */
+/*   --on-secondary: #000000; */
 /**/
-/*   --surface: #c6c2f2; */
-/*   --on-surface: #262628; */
+/*   --surface: #e2eeee; */
+/*   --on-surface: #1a1a1a; */
 /* } */
 
 :root {
-  --background: #000000;
-  --foreground: #faf9f5;
+  --background: #ede4d1;
+  --foreground: #282b2e;
 
-  --primary: #f865b0;
-  --on-primary: #000000;
+  --primary: #282b2e;
+  --on-primary: #ede4d1;
 
-  --secondary: #d1f94d;
-  --on-secondary: #000000;
+  --secondary: #cfde67;
+  --on-secondary: #282b2e;
 
-  --surface: #e2eeee;
-  --on-surface: #1a1a1a;
+  --tertiary: #c889bb;
+  --on-tertiary: #f0ece7;
+
+  --surface: #f0ece7;
+  --on-surface: #282b2e;
+
+  --error: #d81e5b;
+  --on-error: #000000;
 }
 
 @theme inline {
@@ -38,15 +44,29 @@
   --color-secondary: var(--secondary);
   --color-on-secondary: var(--on-secondary);
 
+  --color-tertiary: var(--tertiary);
+  --color-on-tertiary: var(--on-tertiary);
+
   --color-surface: var(--surface);
   --color-on-surface: var(--on-surface);
+
+  --color-error: var(--error);
+  --color-on-error: var(--on-error);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-size: 16px;
+  font-optical-sizing: auto;
+  line-height: 1.5;
+  font-weight: 500;
+  font-style: normal;
+  scrollbar-color: var(--foreground) var(--background);
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
 }

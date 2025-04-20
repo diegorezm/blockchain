@@ -33,8 +33,8 @@ export function Navigation() {
             className={cn(
               "inline-flex items-center  gap-x-4  w-full h-full px-4 py-2 rounded-lg transition-colors duration-400 text-sm",
               pathname === e.href
-                ? "text-on-surface bg-surface hover:opacity-90"
-                : "text-surface hover:bg-surface hover:text-on-surface",
+                ? "text-on-tertiary bg-tertiary hover:opacity-90"
+                : "text-surface hover:bg-tertiary hover:text-on-tertiary",
             )}
           >
             <e.Icon className="size-5" />

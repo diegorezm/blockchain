@@ -9,7 +9,7 @@ import { Navigation } from "./navigation";
 export function MobileSidebar() {
   const [isSheetOpenLeft, setIsSheetOpenLeft] = useState(false);
   return (
-    <div className="block px-4 lg:hidden">
+    <div className="block  lg:hidden">
       <Button
         variant="outline"
         size="sm"

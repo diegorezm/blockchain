@@ -3,7 +3,7 @@ import { MobileSidebar } from "./mobile-sidebar";
 
 export function Navbar() {
   return (
-    <nav className="flex justify-between w-full">
+    <nav className="flex justify-between items-center w-full">
       <div className="block lg:hidden">
         <MobileSidebar />
       </div>
