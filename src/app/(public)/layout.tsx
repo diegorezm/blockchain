@@ -20,7 +20,7 @@ export default function PublicLayout({
 
         <SignedOut>
           <Link href="/sign-in">
-            <Button variant="secondary">SignIn</Button>
+            <Button variant="outline">SignIn</Button>
           </Link>
         </SignedOut>
       </nav>
