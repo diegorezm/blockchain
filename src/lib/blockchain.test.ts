@@ -22,4 +22,9 @@ describe("Blockchain", () => {
     expect(blockchain.getChain().length).toBe(2);
     expect(blockchain.getLastBlock().data).toBe("testing");
   });
+
+  it("Should say it's a valid chain", () => {
+    blockchain.appendBlock("testing");
+    expect(blockchain.isChainValid()).toBe(true);
+  });
 });
