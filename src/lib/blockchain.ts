@@ -38,7 +38,7 @@ export class Blockchain {
 
     this.chain.push(newBlock);
 
-    if (!this._isChainValid(prev, newBlock)) {
+    if (!this._isTransactionValid(prev, newBlock)) {
       this.chain.pop();
     }
   }
@@ -51,7 +51,21 @@ export class Blockchain {
     return this.chain[this.chain.length - 1];
   }
 
-  private _isChainValid(prevBlock: Block, nextBlock: Block) {
+  public isChainValid() {
+    let prevBlock = this.chain[0];
+    let idx = 1;
+    while (idx < this.chain.length - 1) {
+      const currentBlock = this.chain[idx];
+      if (!this._isTransactionValid(prevBlock, currentBlock)) {
+        return false;
+      }
+      prevBlock = currentBlock;
+      idx++;
+    }
+    return true;
+  }
+
+  private _isTransactionValid(prevBlock: Block, nextBlock: Block) {
     const blockHash = this._hashBlock({
       data: nextBlock.data,
       index: nextBlock.index,
